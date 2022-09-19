@@ -1,0 +1,17 @@
+{
+  "name": "ski-free-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "parcel index.html -p 8000",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "kaboom": "^2000.2.9",
+    "parcel-bundler": "^1.12.5"
+  }
+}

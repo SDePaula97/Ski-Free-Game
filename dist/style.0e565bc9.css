@@ -1,0 +1,78 @@
+body {
+    background-color: #DCD7C9;
+    position: absolute;
+    left: 800px;
+    text-align: center;
+}
+h1 {
+  font-family:'Trebuchet MS', 'Lucida Grande', sans-serif
+
+}
+
+
+
+
+
+
+
+
+
+
+#start-button {
+    border: none;
+    width: 200px;
+    height: 100px;
+    border-radius: 10px;
+    background-color: #2C3333;
+    color: #E7F6F2;
+    font-weight: 900;
+    font-size: 20px;
+    font-family:'Trebuchet MS', 'Lucida Grande',  sans-serif;
+    transition: all 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#start-button:hover {
+background-color: #395B64;
+
+}
+
+#start-button:active {
+background-color: #553939;
+
+/* } */
+/* #start-button .loading {
+width:45px;
+height: 45px;
+border: 8px solid rgba(143, 141, 141, 0.2);
+border-radius: 40%;
+box-sizing: border-box;
+border-right-color: rgba(236, 221, 221, 0.969);
+animation: loading-animation 2s linear infinite; */
+   
+
+}
+
+#start-button h3 {
+margin: 0;
+padding: 0;
+
+}
+
+/* #search-button .loading * {
+    display: none;
+}
+
+@keyframes loading-animation {
+ 0% {
+    transform: rotate(0deg);
+ }  
+ 100% {
+    transform: rotate(360deg);
+ } 
+} */
+
+
+/*# sourceMappingURL=/style.0e565bc9.css.map */
