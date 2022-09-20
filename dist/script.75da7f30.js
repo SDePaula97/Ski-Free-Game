@@ -4819,26 +4819,30 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //   searchButtonContent.classList.toggle('loading')
 // }
 //const kaboom = require('kaboom')
-(0, _kaboom.default)();
-var skiers = ["skier-forward", "skier-kinda-right", "skier-kinda-left", "skier-right", "skier-left", "skier-jumping", "skier-ouch"];
-var obstacles = ["tree", "ramp", "dog", "large-tree", "burnt-tree"];
-var monsters = ["monster-move-1", "monster-move-2", "monster-move-3", "monster-move-4", "monster-move-5", "monster-move-6", "monster-move-7", "monster-move-8"]; // load all skiers visuals
+(0, _kaboom.default)({
+  background: [255, 255, 255]
+});
+var Btn = document.getElementById('Btn'); //console.log('test');
 
-for (var _i = 0, _skiers = skiers; _i < _skiers.length; _i++) {
-  var skier = _skiers[_i];
-  loadSprite(skier, "/sprites/".concat(skier, ".png"));
+var skierImage = ["jonSnow"];
+var obstacles = ["tree", "pond", "mountain"];
+var monsters = ["badguy1", "badguy2"]; // load all skiers visuals
+
+for (var _i = 0, _skierImage = skierImage; _i < _skierImage.length; _i++) {
+  var skier = _skierImage[_i];
+  loadSprite(skier, "https://kaboomjs.com/sprites/apple.png\n  ");
 } // load all the obstacles
 
 
 for (var _i2 = 0, _obstacles = obstacles; _i2 < _obstacles.length; _i2++) {
   var obstacle = _obstacles[_i2];
-  loadSprite(obstacle, "/sprites/".concat(obstacle, ".png"));
+  loadSprite(obstacle, "https://kaboomjs.com/sprites/apple.png\n  ");
 } // load all monster visuals
 
 
 for (var _i3 = 0, _monsters = monsters; _i3 < _monsters.length; _i3++) {
   var monster = _monsters[_i3];
-  loadSprite(monster, "/sprites/".concat(monster, ".png"));
+  loadSprite(monster, "https://kaboomjs.com/sprites/apple.png\n  ");
 } //start scene
 
 
@@ -4847,7 +4851,7 @@ scene("ski", function () {
   var OBSTACLE_SPEED_Y = -90;
   var PAUSED = true;
   var AIRBORNE = false;
-  var player = add([sprite("skier-right"), area(), pos(width() / 2, height() / 2), origin("center"), "player", {
+  var player = add(["https://kaboomjs.com/sprites/apple.png", area(), pos(width() / 2, height() / 2), origin("center"), "player", {
     state: "going-right"
   }]); // handle presses left
 
@@ -4861,7 +4865,7 @@ scene("ski", function () {
 
       case "going-forward":
         player.state = "going-kinda-left";
-        player.use(sprite("skier-kinda-left"));
+        player.use(sprite("jonSnow-kinda-left"));
         OBSTACLE_SPEED_X = 90;
         OBSTACLE_SPEED_Y = -90;
         PAUSED = false;
@@ -4869,7 +4873,7 @@ scene("ski", function () {
 
       default:
         player.state = "going-left";
-        player.use(sprite("skier-left"));
+        player.use(sprite("jonSnow-left"));
         OBSTACLE_SPEED_X = 0;
         OBSTACLE_SPEED_Y = 0;
         PAUSED = true;
@@ -4887,7 +4891,7 @@ scene("ski", function () {
 
       case "going-forward":
         player.state = "going-kinda-right";
-        player.use(sprite("skier-kinda-right"));
+        player.use(sprite("jonSnow-kinda-right"));
         OBSTACLE_SPEED_X = -90;
         OBSTACLE_SPEED_Y = -90;
         PAUSED = false;
@@ -4895,7 +4899,7 @@ scene("ski", function () {
 
       default:
         player.state = "going-right";
-        player.use(sprite("skier-right"));
+        player.use(sprite("jonSnow-right"));
         OBSTACLE_SPEED_X = 0;
         OBSTACLE_SPEED_Y = 0;
         PAUSED = true;
@@ -4906,7 +4910,7 @@ scene("ski", function () {
   onKeyPress("down", function () {
     if (player.state == "about-to-be-eaten" || player.state == "flat") return;
     player.state = "going-forward";
-    player.use(sprite("skier-forward"));
+    player.use(sprite("jonSnow-forward"));
     OBSTACLE_SPEED_X = 0;
     OBSTACLE_SPEED_Y = -90;
     PAUSED = false;
@@ -4914,7 +4918,7 @@ scene("ski", function () {
 
   function spawnObstacle() {
     var name = choose(obstacles);
-    add([sprite(name), area(), pos(rand(width()), height()), origin("bot"), name == "ramp" ? "ramp" : "danger", "obstacle"]);
+    add([sprite(name), area(), pos(rand(width()), height()), origin("bot"), name == "pond" ? "pond" : "danger", "obstacle"]);
   } // spawn obstacles continuously
 
 
@@ -4940,15 +4944,15 @@ scene("ski", function () {
     }
   }); // handle collisions of the ramp to make sure the player only gets to use it if going forward
 
-  player.onCollide("ramp", function () {
+  player.onCollide("tree", function () {
     if (player.state == "going-forward") {
-      player.use(sprite("skier-jumping"));
+      player.use(sprite("jonSnow-jumping"));
       OBSTACLE_SPEED_Y = -400;
       AIRBORNE = true;
       wait(1, function () {
         OBSTACLE_SPEED_Y = -90;
         AIRBORNE = false;
-        player.use(sprite("skier-forward"));
+        player.use(sprite("jonSnow-forward"));
       });
     } else {
       if (!AIRBORNE) {
@@ -4959,7 +4963,7 @@ scene("ski", function () {
 
   function gameOver() {
     shake(20);
-    player.use(sprite("skier-ouch"));
+    player.use(sprite("jonSnow-ouch"));
     player.state = "flat";
     OBSTACLE_SPEED_X = 0;
     OBSTACLE_SPEED_Y = 0;
@@ -4974,43 +4978,41 @@ scene("ski", function () {
     player.state = "about-to-be-eaten";
     OBSTACLE_SPEED_X = 0;
     OBSTACLE_SPEED_Y = 0;
-    var monster = add([sprite("monster-move-1"), area(), pos(rand(width()), height()), origin("bot"), "monster"]);
+    var monster = add([sprite("badguy1"), area(), pos(rand(width()), height()), origin("bot"), "monster"]);
     wait(0.5, function () {
-      monster.use(sprite("monster-move-2"));
+      monster.use(sprite("badguy1"));
       monster.pos.x = monster.pos.x - player.pos.x / 3;
       monster.pos.y = monster.pos.y - player.pos.y / 3;
     });
     wait(1, function () {
-      monster.use(sprite("monster-move-3"));
+      monster.use(sprite("badguy1"));
       monster.pos.x = monster.pos.x - player.pos.x / 2;
       monster.pos.y = monster.pos.y - player.pos.y / 2;
     });
     wait(1.5, function () {
-      monster.use(sprite("monster-move-4"));
+      monster.use(sprite("badguy2"));
       monster.pos.x = player.pos.x;
       monster.pos.y = player.pos.y;
       destroy(player);
     });
     wait(2, function () {
-      monster.use(sprite("monster-move-5"));
+      monster.use(sprite("badguy2"));
     });
     wait(2.5, function () {
-      monster.use(sprite("monster-move-6"));
+      monster.use(sprite("badguy2"));
     });
     wait(3, function () {
-      monster.use(sprite("monster-move-7"));
+      monster.use(sprite("badguy2"));
     });
     wait(3.5, function () {
-      monster.use(sprite("monster-move-8"));
+      monster.use(sprite("badguy2"));
     });
     wait(5, function () {
       go("ski");
     });
   });
-});
-var playGameBtn = document.querySelector('#start-button');
-playGameBtn.addEventListener('click', playGame);
-console.log('test');
+}); //Btn.addEventListener('click', playGame)
+
 go("ski");
 },{"kaboom":"node_modules/kaboom/dist/kaboom.mjs"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -5040,7 +5042,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60243" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61392" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

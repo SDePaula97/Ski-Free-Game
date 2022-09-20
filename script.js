@@ -11,50 +11,46 @@
 
 import kaboom from 'kaboom'
 //const kaboom = require('kaboom')
-kaboom()
+kaboom({
+  background: [255, 255, 255]
+})
 
-const skiers = [
-  "skier-forward",
-  "skier-kinda-right",
-  "skier-kinda-left",
-  "skier-right",
-  "skier-left",
-  "skier-jumping",
-  "skier-ouch"
+const Btn = document.getElementById('Btn')
+
+//console.log('test');
+
+const skierImage = [
+  "jonSnow",
 ]
+
 
 const obstacles = [
   "tree",
-  "ramp",
-  "dog",
-  "large-tree",
-  "burnt-tree"
+  "pond",
+  "mountain",
 ]
 
 const monsters = [
-  "monster-move-1",
-  "monster-move-2",
-  "monster-move-3",
-  "monster-move-4",
-  "monster-move-5",
-  "monster-move-6",
-  "monster-move-7",
-  "monster-move-8",
+  "badguy1",
+  "badguy2",
 ]
 
 // load all skiers visuals
-for (const skier of skiers) {
-  loadSprite(skier, `/sprites/${skier}.png`)
+for (const skier of skierImage) {
+  loadSprite(skier, `https://kaboomjs.com/sprites/apple.png
+  `)
 }
 
 // load all the obstacles
 for (const obstacle of obstacles) {
-  loadSprite(obstacle, `/sprites/${obstacle}.png`)
+  loadSprite(obstacle, `https://kaboomjs.com/sprites/apple.png
+  `)
 }
 
 // load all monster visuals
 for (const monster of monsters) {
-  loadSprite(monster, `/sprites/${monster}.png`)
+  loadSprite(monster, `https://kaboomjs.com/sprites/apple.png
+  `)
 }
 
 //start scene
@@ -65,7 +61,7 @@ scene("ski", () => {
   let AIRBORNE = false
 
   const player = add([
-    sprite("skier-right"),
+    ("https://kaboomjs.com/sprites/apple.png"),
     area(),
     pos(width() /2, height() /2),
     origin("center"),
@@ -74,6 +70,9 @@ scene("ski", () => {
       state: "going-right"
     }
   ])
+  
+  
+  
 
   // handle presses left
   onKeyPress("left", () => {
@@ -84,14 +83,14 @@ scene("ski", () => {
         break
       case "going-forward":
         player.state = "going-kinda-left"
-        player.use(sprite("skier-kinda-left"))
+        player.use(sprite("jonSnow-kinda-left"))
         OBSTACLE_SPEED_X = 90
         OBSTACLE_SPEED_Y = -90
         PAUSED = false
         break
       default:
         player.state = "going-left"
-        player.use(sprite("skier-left"))
+        player.use(sprite("jonSnow-left"))
         OBSTACLE_SPEED_X = 0
         OBSTACLE_SPEED_Y = 0
         PAUSED = true
@@ -108,14 +107,14 @@ scene("ski", () => {
         break
       case "going-forward":
         player.state = "going-kinda-right"
-        player.use(sprite("skier-kinda-right"))
+        player.use(sprite("jonSnow-kinda-right"))
         OBSTACLE_SPEED_X = -90
         OBSTACLE_SPEED_Y = -90
         PAUSED = false
         break
       default:
         player.state = "going-right"
-        player.use(sprite("skier-right"))
+        player.use(sprite("jonSnow-right"))
         OBSTACLE_SPEED_X = 0
         OBSTACLE_SPEED_Y = 0
         PAUSED = true
@@ -127,7 +126,7 @@ scene("ski", () => {
   onKeyPress("down", () => {
     if (player.state == "about-to-be-eaten" || player.state == "flat") return
     player.state = "going-forward"
-    player.use(sprite("skier-forward"))
+    player.use(sprite("jonSnow-forward"))
     OBSTACLE_SPEED_X = 0
     OBSTACLE_SPEED_Y = -90
     PAUSED = false
@@ -142,7 +141,7 @@ scene("ski", () => {
       area(),
       pos(rand(width()), height()),
       origin("bot"),
-      name == "ramp" ? "ramp" : "danger",
+      name == "pond" ? "pond" : "danger",
       "obstacle"
     ])
   }
@@ -173,15 +172,15 @@ scene("ski", () => {
   })
 
   // handle collisions of the ramp to make sure the player only gets to use it if going forward
-  player.onCollide("ramp", () => {
+  player.onCollide("tree", () => {
     if (player.state == "going-forward") {
-      player.use(sprite("skier-jumping"))
+      player.use(sprite("jonSnow-jumping"))
       OBSTACLE_SPEED_Y = -400
       AIRBORNE = true
       wait(1, () => {
         OBSTACLE_SPEED_Y = -90
         AIRBORNE = false
-        player.use(sprite("skier-forward"))
+        player.use(sprite("jonSnow-forward"))
       })
     } else {
       if (!AIRBORNE) {
@@ -193,7 +192,7 @@ scene("ski", () => {
   // game over
   function gameOver() {
     shake(20)
-    player.use(sprite("skier-ouch"))
+    player.use(sprite("jonSnow-ouch"))
     player.state = "flat"
     OBSTACLE_SPEED_X = 0
     OBSTACLE_SPEED_Y = 0
@@ -210,7 +209,7 @@ scene("ski", () => {
     OBSTACLE_SPEED_Y = 0
 
     const monster = add([
-      sprite("monster-move-1"),
+      sprite("badguy1"),
       area(),
       pos(rand(width()), height()),
       origin("bot"),
@@ -218,38 +217,38 @@ scene("ski", () => {
     ])
 
     wait(0.5, () => {
-      monster.use(sprite("monster-move-2"))
+      monster.use(sprite("badguy1"))
       monster.pos.x = monster.pos.x - (player.pos.x / 3)
       monster.pos.y = monster.pos.y - (player.pos.y / 3)
     })
 
     wait(1, () => {
-      monster.use(sprite("monster-move-3"))
+      monster.use(sprite("badguy1"))
       monster.pos.x = monster.pos.x - (player.pos.x / 2)
       monster.pos.y = monster.pos.y - (player.pos.y / 2)
     })
   
     wait(1.5, () => {
-        monster.use(sprite("monster-move-4"))
+        monster.use(sprite("badguy2"))
         monster.pos.x = player.pos.x
         monster.pos.y = player.pos.y
         destroy(player)
       })
   
     wait(2, () => {
-      monster.use(sprite("monster-move-5"))
+      monster.use(sprite("badguy2"))
     })
   
      wait(2.5, () => {
-      monster.use(sprite("monster-move-6"))
+      monster.use(sprite("badguy2"))
     })
   
     wait(3, () => {
-      monster.use(sprite("monster-move-7"))
+      monster.use(sprite("badguy2"))
     })
   
      wait(3.5, () => {
-      monster.use(sprite("monster-move-8"))
+      monster.use(sprite("badguy2"))
     })
   
     wait(5, () => {
@@ -260,9 +259,6 @@ scene("ski", () => {
 
   
 })
-const playGameBtn = document.querySelector('#start-button');
-playGameBtn.addEventListener('click', playGame)
-console.log('test');
 
-
+//Btn.addEventListener('click', playGame)
 go("ski")

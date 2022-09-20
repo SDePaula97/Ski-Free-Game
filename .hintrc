@@ -6,7 +6,8 @@
     "axe/text-alternatives": [
       "default",
       {
-        "image-alt": "off"
+        "image-alt": "off",
+        "document-title": "off"
       }
     ],
     "no-inline-styles": "off",
