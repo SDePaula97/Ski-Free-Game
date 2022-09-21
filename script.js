@@ -1,56 +1,55 @@
 
-// const searchButton = document.querySelector('#search-button')
-// const searchButtonContent = document.querySelector('#search-button div')
-
-// searchButton.addEventListener('click',toggleButton )
-
-// function toggleButton() {
-//   searchButtonContent.classList.toggle('loading')
-
-// }
 
 import kaboom from 'kaboom'
 //const kaboom = require('kaboom')
 kaboom({
-  background: [255, 255, 255]
+  background: [255, 255, 255],
+  height: 1000,
+  width:1000, 
 })
 
-const Btn = document.getElementById('Btn')
+//const Btn = document.getElementById('Btn')
 
 //console.log('test');
+//loadSprite("badguy1", "badguy1.png")
+loadSprite("jonSnow3", "jonSnow3.png")
+
 
 const skierImage = [
-  "jonSnow",
+  "jonSnow3",
 ]
 
 
 const obstacles = [
-  "tree",
-  "pond",
-  "mountain",
+  "spike",
+  "ramp",
+  "snowTree",
+  "snowTile",
+  "bush",
+
 ]
 
 const monsters = [
   "badguy1",
-  "badguy2",
+  "ghosty",
+  "iceMonster",
+  
 ]
 
 // load all skiers visuals
-for (const skier of skierImage) {
-  loadSprite(skier, `https://kaboomjs.com/sprites/apple.png
-  `)
-}
+// for (const skier of skierImage) {
+//   loadSprite(skier, `https://kaboomjs.com/sprites/apple.png
+//   `)
+// }
 
 // load all the obstacles
 for (const obstacle of obstacles) {
-  loadSprite(obstacle, `https://kaboomjs.com/sprites/apple.png
-  `)
+  loadSprite(obstacle, `${obstacle}.png`)
 }
 
 // load all monster visuals
-for (const monster of monsters) {
-  loadSprite(monster, `https://kaboomjs.com/sprites/apple.png
-  `)
+ for (const monster of monsters) {
+  loadSprite(monster, `${monster}.png`)
 }
 
 //start scene
@@ -61,7 +60,7 @@ scene("ski", () => {
   let AIRBORNE = false
 
   const player = add([
-    ("https://kaboomjs.com/sprites/apple.png"),
+    sprite("jonSnow3"),
     area(),
     pos(width() /2, height() /2),
     origin("center"),
@@ -83,14 +82,14 @@ scene("ski", () => {
         break
       case "going-forward":
         player.state = "going-kinda-left"
-        player.use(sprite("jonSnow-kinda-left"))
+        player.use(sprite("jonSnow3"))
         OBSTACLE_SPEED_X = 90
         OBSTACLE_SPEED_Y = -90
         PAUSED = false
         break
       default:
         player.state = "going-left"
-        player.use(sprite("jonSnow-left"))
+        player.use(sprite("jonSnow3"))
         OBSTACLE_SPEED_X = 0
         OBSTACLE_SPEED_Y = 0
         PAUSED = true
@@ -107,14 +106,14 @@ scene("ski", () => {
         break
       case "going-forward":
         player.state = "going-kinda-right"
-        player.use(sprite("jonSnow-kinda-right"))
+        player.use(sprite("jonSnow3"))
         OBSTACLE_SPEED_X = -90
         OBSTACLE_SPEED_Y = -90
         PAUSED = false
         break
       default:
         player.state = "going-right"
-        player.use(sprite("jonSnow-right"))
+        player.use(sprite("jonSnow3"))
         OBSTACLE_SPEED_X = 0
         OBSTACLE_SPEED_Y = 0
         PAUSED = true
@@ -126,7 +125,7 @@ scene("ski", () => {
   onKeyPress("down", () => {
     if (player.state == "about-to-be-eaten" || player.state == "flat") return
     player.state = "going-forward"
-    player.use(sprite("jonSnow-forward"))
+    player.use(sprite("jonSnow3"))
     OBSTACLE_SPEED_X = 0
     OBSTACLE_SPEED_Y = -90
     PAUSED = false
@@ -141,7 +140,7 @@ scene("ski", () => {
       area(),
       pos(rand(width()), height()),
       origin("bot"),
-      name == "pond" ? "pond" : "danger",
+      name == "spike" ? "spike" : "danger",
       "obstacle"
     ])
   }
@@ -172,15 +171,15 @@ scene("ski", () => {
   })
 
   // handle collisions of the ramp to make sure the player only gets to use it if going forward
-  player.onCollide("tree", () => {
+  player.onCollide("tree2", () => {
     if (player.state == "going-forward") {
-      player.use(sprite("jonSnow-jumping"))
+      player.use(sprite("jonSnow3"))
       OBSTACLE_SPEED_Y = -400
       AIRBORNE = true
       wait(1, () => {
         OBSTACLE_SPEED_Y = -90
         AIRBORNE = false
-        player.use(sprite("jonSnow-forward"))
+        player.use(sprite("jonSnow3"))
       })
     } else {
       if (!AIRBORNE) {
@@ -192,7 +191,7 @@ scene("ski", () => {
   // game over
   function gameOver() {
     shake(20)
-    player.use(sprite("jonSnow-ouch"))
+    player.use(sprite("jonSnow3"))
     player.state = "flat"
     OBSTACLE_SPEED_X = 0
     OBSTACLE_SPEED_Y = 0
@@ -229,26 +228,26 @@ scene("ski", () => {
     })
   
     wait(1.5, () => {
-        monster.use(sprite("badguy2"))
+        monster.use(sprite("badguy1"))
         monster.pos.x = player.pos.x
         monster.pos.y = player.pos.y
         destroy(player)
       })
   
     wait(2, () => {
-      monster.use(sprite("badguy2"))
+      monster.use(sprite("badguy1"))
     })
   
      wait(2.5, () => {
-      monster.use(sprite("badguy2"))
+      monster.use(sprite("badguy1"))
     })
   
     wait(3, () => {
-      monster.use(sprite("badguy2"))
+      monster.use(sprite("badguy1"))
     })
   
      wait(3.5, () => {
-      monster.use(sprite("badguy2"))
+      monster.use(sprite("badguy1"))
     })
   
     wait(5, () => {

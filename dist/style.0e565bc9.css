@@ -1,23 +1,17 @@
 * {
     margin:0;
     padding:0;
-    box-sizing: border-box;
+    box-sizing: content-box;
 }
 
 #canvas1 {
     border: 5px solid black;
-    position: absolute;
-    top: 300%;
+    position: static;
+    top: 200%;
     left: 50%;
     transform: translate(-50%, -50%);
     max-width: 700%;
 }
-
-
-
-
-
-
 
 body {
     background-color: #DCD7C9;
@@ -41,9 +35,9 @@ h1 {
     font-size: 20px;
     font-family:'Trebuchet MS', 'Lucida Grande',  sans-serif;
     transition: all 0.3s;
-    display: flex;
     justify-content: center;
     align-items: center;
+    
 }
 
 #Btn:hover {
@@ -55,6 +49,10 @@ background-color: #395B64;
 background-color: #553939;
    
 
+}
+
+#startImage {
+    height: 400px;
 }
 
 
