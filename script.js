@@ -272,4 +272,4 @@ let chooseWinner = () => {
 })
 
 resetBtn.addEventListener("click", resetBtn);
-go("startGame")
+go("startGame") 
