@@ -73,9 +73,6 @@ scene("startGame", () => {
     }
   ])
   
-  
-  
-
   // handle presses left
   onKeyPress("left", () => {
     switch(player.state) {
@@ -207,8 +204,7 @@ let chooseWinner = () => {
   }
 };
 
-
-  // game over
+// game over
   function gameOver() {
     shake(20)
     player.use(sprite("jonSnow3"))
