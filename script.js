@@ -8,10 +8,13 @@ kaboom({
   width:1000, 
 })
 
-//const Btn = document.getElementById('Btn')
 
-//console.log('test');
-//loadSprite("badguy1", "badguy1.png")
+const playerScoreElem = document.getElementById("player-score");
+const computerScoreElem = document.getElementById("computer-score");
+const startBtn = document.getElementById("start-button");
+const resetBtn = document.getElementById("reset-button");
+const winnerAlert = document.getElementById("winner-alert");
+
 loadSprite("jonSnow3", "jonSnow3.png")
 
 
@@ -53,7 +56,7 @@ for (const obstacle of obstacles) {
 }
 
 //start scene
-scene("ski", () => {
+scene("startGame", () => {
   let OBSTACLE_SPEED_X = 0
   let OBSTACLE_SPEED_Y = -90
   let PAUSED = true
@@ -187,6 +190,23 @@ scene("ski", () => {
       }
     }
   })
+  
+ let winner;
+let chooseWinner = () => {
+  if (
+    Number(playerScoreElem.textContent) > Number(computerScoreElem.textContent)
+  ) {
+    winner = "Player wins!";
+  }
+  if (
+    Number(playerScoreElem.textContent) < Number(computerScoreElem.textContent)
+  ) {
+    winner = "Computer wins!";
+  } else {
+    winner = "It's a Tie. No one wins! ";
+  }
+};
+
 
   // game over
   function gameOver() {
@@ -196,7 +216,7 @@ scene("ski", () => {
     OBSTACLE_SPEED_X = 0
     OBSTACLE_SPEED_Y = 0
     wait(1, () => {
-      go("ski")
+      go("startGame")
     })
   }
 
@@ -251,13 +271,10 @@ scene("ski", () => {
     })
   
     wait(5, () => {
-        go("ski")
+        go("startGame")
     }) 
   })
-
-
-  
 })
-
-//Btn.addEventListener('click', playGame)
-go("ski")
+go("startGame")
+startBtn.addEventListener("click", startBtn );
+resetBtn.addEventListener("click", resetBtn);
