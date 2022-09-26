@@ -14,17 +14,36 @@
 }
 
 body {
-    background-color: #DCD7C9;
-    position: absolute;
-    left: 800px;
+     background-color: #7895B2;
+    position: fixed;
     text-align: center;
+    bottom: 40px;
 }
 h1 {
-  font-family:'Trebuchet MS', 'Lucida Grande', sans-serif
+ font-family: 'Bungee', cursive;
+  color: #890596;
+  font-size: 70px;
+  margin: 10px;
+  padding-top: -60px;
+  
 
 }
 
-#Btn {
+#Btn:hover {
+background-color: #395B64;
+
+}
+
+#Btn:active {
+background-color: #553939;
+   
+
+}
+
+
+
+
+/*#Btn {
     border: none;
     width: 200px;
     height: 100px;
@@ -39,20 +58,35 @@ h1 {
     align-items: center;
     
 }
+*/
 
-#Btn:hover {
-background-color: #395B64;
+#winner-alert{
+    background-color: var(foreground-color);
+    color: #A460ED;
+    font-size:large;
+    text-align: center;
+  }
 
+.menu{
+    display: flex;
+    align-content: center;
 }
 
-#Btn:active {
-background-color: #553939;
-   
-
+.button {
+    position:inherit;
+    right: 10%;
+    top:10%;
+    background-color: var(foreground-color);
+    color: #FFDE00;
+    font-size:x-large;
+    border:none;
+    border-radius:10px;
 }
 
-#startImage {
-    height: 400px;
+ul{
+    list-style-type: none;
+    display:flex;
+    margin:auto;
 }
 
 
