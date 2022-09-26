@@ -6,8 +6,10 @@ This is a spinoff of the classic retro game Ski Free, where the player navigates
  Tech Stack
 - Javascript
 - Kaboom.js
--HTML
--CSS
+ -HTML
+ -CSS
+ Kaboom is a JavaScript library that helps you make games fast and fun :D
+ In Kaboom, each game object is composed from multiple components. Each component will give the game obj certain functionality.
 
  Upcoming Features
 - Going to add more levels that get harder.
