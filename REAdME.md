@@ -12,6 +12,6 @@ This is a spinoff of the classic retro game Ski Free, where the player navigates
  In Kaboom, each game object is composed from multiple components. Each component will give the game obj certain functionality.
 
  Upcoming Features
-- Going to add more levels that get harder.
+- Going to add more levels that get harder/different obstacles.
 - Player will be able to select their character at the begining of the game.
-- Different Obstacles/Monsters
+- Better styling and background.
