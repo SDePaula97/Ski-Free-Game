@@ -10,8 +10,7 @@ kaboom({
 
 
 const playerScore = document.getElementById("player-score");
-const computerScore = document.getElementById("computer-score");
-const startBtn = document.getElementById("start-button");
+const computerScore = document.getElementById("computer-score");;
 const resetBtn = document.getElementById("reset-button");
 const winnerAlert = document.getElementById("winner-alert");
 
@@ -272,6 +271,5 @@ let chooseWinner = () => {
   })
 })
 
-startBtn.addEventListener("click", startBtn );
 resetBtn.addEventListener("click", resetBtn);
 go("startGame")
