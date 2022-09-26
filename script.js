@@ -9,8 +9,8 @@ kaboom({
 })
 
 
-const playerScoreElem = document.getElementById("player-score");
-const computerScoreElem = document.getElementById("computer-score");
+const playerScore = document.getElementById("player-score");
+const computerScore = document.getElementById("computer-score");
 const startBtn = document.getElementById("start-button");
 const resetBtn = document.getElementById("reset-button");
 const winnerAlert = document.getElementById("winner-alert");
@@ -191,12 +191,12 @@ scene("startGame", () => {
  let winner;
 let chooseWinner = () => {
   if (
-    Number(playerScoreElem.textContent) > Number(computerScoreElem.textContent)
+    Number(playerScore.textContent) > Number(computerScore.textContent)
   ) {
     winner = "Player wins!";
   }
   if (
-    Number(playerScoreElem.textContent) < Number(computerScoreElem.textContent)
+    Number(playerScore.textContent) < Number(computerScore.textContent)
   ) {
     winner = "Computer wins!";
   } else {
